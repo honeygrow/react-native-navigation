@@ -171,15 +171,16 @@ public class ViewUtils {
     }
 
     public static int getStatusBarHeight() {
-        if (statusBarHeight > 0) {
-            return statusBarHeight;
-        }
-        final Resources resources = NavigationApplication.instance.getResources();
-        final int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
-        statusBarHeight = resourceId > 0 ?
-                resources.getDimensionPixelSize(resourceId) :
-                (int) convertDpToPixel(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? 24 : 25);
-        return statusBarHeight;
+        return 0;
+        /* if (statusBarHeight > 0) { */
+        /*     return statusBarHeight; */
+        /* } */
+        /* final Resources resources = NavigationApplication.instance.getResources(); */
+        /* final int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android"); */
+        /* statusBarHeight = resourceId > 0 ? */
+        /*         resources.getDimensionPixelSize(resourceId) : */
+        /*         (int) convertDpToPixel(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? 24 : 25); */
+        /* return statusBarHeight; */
     }
 
     public static int getToolBarHeight() {
