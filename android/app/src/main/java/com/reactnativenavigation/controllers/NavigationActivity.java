@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.Window;
 
 import com.facebook.react.bridge.Callback;
@@ -46,6 +47,8 @@ import java.util.List;
 
 public class NavigationActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler, Subscriber, PermissionAwareActivity {
 
+    public static final String TOUCH_EVENT = "com.reactnativenavigation.broadcast.TOUCH_EVENT";
+
     /**
      * Although we start multiple activities, we make sure to pass Intent.CLEAR_TASK | Intent.NEW_TASK
      * So that we actually have only 1 instance of the activity running at one time.
@@ -80,6 +83,15 @@ public class NavigationActivity extends AppCompatActivity implements DefaultHard
         createModalController();
         createLayout();
         NavigationApplication.instance.getActivityCallbacks().onActivityCreated(this, savedInstanceState);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        Intent intent = new Intent();
+        intent.setAction(TOUCH_EVENT);
+        intent.putExtra("motionEventAction", event.getAction());
+        sendBroadcast(intent);
+        return super.dispatchTouchEvent(event);
     }
 
     private void setOrientation() {
